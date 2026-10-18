@@ -1,0 +1,33 @@
+# sparkrca.conf — collector-side site settings.
+#
+# Copy to sparkrca.conf next to the scripts, or ~/.config/sparkrca/sparkrca.conf,
+# or point SPARKRCA_CONF at it. KEY=VALUE, values taken literally (a leading ~
+# expands to $HOME). Environment variables of the same name override this file.
+# Every setting is optional.
+
+# ResourceManager and Spark History Server REST endpoints.
+# Unset: discovered from $HADOOP_CONF_DIR/yarn-site.xml (HA-aware, picks the
+# ACTIVE RM) and $SPARK_CONF_DIR/spark-defaults.conf
+# (spark.yarn.historyServer.address).
+#SPARKRCA_RM_URL=http://resourcemanager.example.com:8088
+#SPARKRCA_SHS_URL=http://historyserver.example.com:18080
+
+# Service account provisioned on each NodeManager by setup_sparkrca_node.sh --user.
+#SPARKRCA_USER=svc-sparkrca
+
+# Private key for that account, and the dedicated known_hosts file holding
+# fingerprint-checked NodeManager host keys.
+#SPARKRCA_KEY=~/.ssh/sparkrca
+#SPARKRCA_KNOWN_HOSTS=~/.ssh/known_hosts_sparkrca
+
+# Where evidence bundles are written: <dir>/<app_id>/
+#SPARKRCA_OUT_DIR=/tmp/spark_rca
+
+# YARN app owner passed to `yarn logs` when neither --owner, the RM record nor
+# the History Server names one. Defaults to the user running the collector.
+#SPARKRCA_DEFAULT_OWNER=
+
+# Process names (comma-separated, as `ps -o comm` prints them — truncated to
+# 15 characters) whose presence on a NodeManager marks it as co-tenanted with
+# non-Hadoop workloads. Matched against the probe's process list.
+#SPARKRCA_COTENANT_SERVICES=postgres,redis-server,httpd,nginx,dockerd,containerd,mysqld,mariadbd,mongod

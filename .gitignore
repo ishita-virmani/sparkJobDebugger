@@ -1,0 +1,9 @@
+# Site-specific — never commit
+sparkrca.conf
+*.local.md
+
+# Collector keys and evidence bundles
+/sparkrca
+/sparkrca.pub
+/known_hosts_sparkrca
+/spark_rca/
